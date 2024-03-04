@@ -21,7 +21,7 @@
             var employee2 = GetEmployee("Marek", "Kaczanoga", 34);
 
             // jeśli usuniemy komentarz dla fragmentu kodu poniżej to test będzie zdany
-            //employee2 = employee1; 
+            employee2 = employee1; 
             //lub drugi wariant 
             //employee1 = employee2;
 
@@ -73,6 +73,9 @@
             int number1 = 32;
             int number2 = 34;
 
+            // warunek podstawiamy pod pierwszą liczbę liczbę drugą 
+            number1 = number2;
+
             Assert.AreEqual(number1, number2," Liczby są różne!!!");
 
         }
@@ -117,6 +120,9 @@
             float number1 = 32.1f;
             float number2 = 33.2f;
 
+            //warunek podstawiamy pod jedną liczbę drugą
+            number2 = number1; 
+
             Assert.AreEqual(number1, number2);
             
         }
@@ -138,6 +144,9 @@
 
             string firstString = "Michał Anioł";
             string secondString = "Demon";
+
+            //podstawiamy pod jeden ciąg znaków drugi
+            firstString = secondString;
 
             Assert.AreEqual(firstString, secondString, "Ciągi znaków się różnią");
 
