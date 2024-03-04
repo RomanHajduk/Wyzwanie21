@@ -4,33 +4,44 @@ namespace Wyzwanie21.Test
     {
 
         [Test]
-        public void WhenAddedThreeScoreUser_ShouldCorrectTotalPoint()
+        public void WhenUsingTwoVersionMethodGetStatistics_ShouldTheSameResult()
         {
             
             var employee = new Employee("Mariusz", "Pudzianowski", 54);
-            employee.AddScore(6);
-            employee.AddScore(5);
-            employee.AddScore(8);
+            employee.AddGrade(7.16f);
+            employee.AddGrade(5.3f);
+            employee.AddGrade(8.3f);
 
-            var totalPointToVerified = employee.Result;
+            var statistics = employee.GetStatistics();
+            var statistics2 = employee.GetStatisticsVersion2();
 
-            Assert.AreEqual(19, totalPointToVerified);
+            Assert.AreEqual(statistics.Min, statistics2.Min);
+            Assert.AreEqual(statistics.Max, statistics2.Max);
+            Assert.AreEqual(statistics.Average, statistics2.Average);
+            Assert.AreEqual(statistics.Count, statistics2.Count);
         }
 
 
         [Test]
-        public void WhenAddedFourScoreUser_ShouldCorrectTotalPoint()
+        public void WhenAddedGradeUser_ShouldCorrectStatistics()
         {
             
             var employee = new Employee("Adam","Kowalski",35);
-            employee.AddScore(5);
-            employee.AddScore(6);
-            employee.AddScore(1);
-            employee.AddScore(2);
             
-            var totalPointToVerified = employee.Result;
+            employee.AddGrade(5);
+            employee.AddGrade(6.4f);
+            employee.AddGrade(1.4f);
+            employee.AddGrade(2.5f);
+            employee.AddGrade(6.9f);
 
-            Assert.AreEqual(14, totalPointToVerified);
+            var averageScore = employee.GetSummaryScore()/ 5; 
+           
+            var statisticEmployeeToVerified = employee.GetStatistics();
+            
+            Assert.AreEqual(1.4f, statisticEmployeeToVerified.Min);
+            Assert.AreEqual(6.9f,statisticEmployeeToVerified.Max);
+            Assert.AreEqual(averageScore,statisticEmployeeToVerified.Average);
+            Assert.AreEqual(5,statisticEmployeeToVerified.Count);
             
         }
 
@@ -39,14 +50,19 @@ namespace Wyzwanie21.Test
         {
             
             var employee = new Employee("Magdalena", "Jaworska", 44);
-            employee.AddScore(15);
-            employee.AddScore(26);
-            employee.AddScore(16);
-            employee.AddScore(2);
+            employee.AddGrade(15);
+            employee.AddGrade(26);
+            employee.AddGrade(16);
+            employee.AddGrade(2);
 
-            var positiveTotalPointToVerified = employee.Result;
+            var averageScore = employee.GetSummaryScore() / 4;
 
-            Assert.Positive(positiveTotalPointToVerified);
+            var statisticEmployeeToVerified = employee.GetStatistics();
+
+            Assert.Positive(statisticEmployeeToVerified.Min);
+            Assert.Positive(statisticEmployeeToVerified.Max);
+            Assert.Positive(statisticEmployeeToVerified.Average);
+            Assert.Positive(statisticEmployeeToVerified.Count);
         }
 
         [Test]
@@ -54,31 +70,40 @@ namespace Wyzwanie21.Test
         {
 
             var employee = new Employee("Domino", "Jachaœ", 28);
-            employee.AddScore(5);
-            employee.AddScore(6);
-            employee.AddScore(-16);
-            employee.AddScore(-7);
-            
-            var totalPointToVerified = employee.Result;
+            employee.AddGrade(5);
+            employee.AddGrade(12.5f);
+            employee.AddGrade(-16);
+            employee.AddGrade(-7);
+            var averageScore = employee.GetSummaryScore() / 4;
 
-            Assert.AreEqual(-12, totalPointToVerified);
+            var statisticEmployeeToVerified = employee.GetStatistics();
+
+            Assert.AreEqual(-16, statisticEmployeeToVerified.Min);
+            Assert.AreEqual(12.5f, statisticEmployeeToVerified.Max);
+            Assert.AreEqual(averageScore, statisticEmployeeToVerified.Average);
+            Assert.AreEqual(4, statisticEmployeeToVerified.Count);
         }
 
         [Test]
-        public void WhenAddedAllNegativeScoreUser_ShouldCorrectNegativeResultAndNegativeTotalPoint()
+        public void WhenAddedAllNegativeScoreUser_ShouldCorrectNegativeResultAndPositiveCountGrades()
         {
             
             var employee = new Employee("Robin", "Hood", 24);
-            employee.AddScore(-5);
-            employee.AddScore(-3);
-            employee.AddScore(-6);
-            employee.AddScore(-16);
-            employee.AddScore(-7);
-                      
-            var negativeResultToVerified = employee.Result;
+            employee.AddGrade(-5);
+            employee.AddGrade(-3);
+            employee.AddGrade(-6);
+            employee.AddGrade(-16.4f);
+            employee.AddGrade(-7);
+            employee.AddGrade(-6.8f);
 
-            Assert.AreEqual(-37, negativeResultToVerified);
-            Assert.Negative(negativeResultToVerified);
+            var averageScore = employee.GetSummaryScore() / 6;
+
+            var statisticEmployeeToVerified = employee.GetStatistics();
+
+            Assert.AreEqual(-16.4f, statisticEmployeeToVerified.Min);
+            Assert.AreEqual(-3, statisticEmployeeToVerified.Max);
+            Assert.AreEqual(averageScore, statisticEmployeeToVerified.Average);
+            Assert.AreEqual(6, statisticEmployeeToVerified.Count);
 
         }
 
