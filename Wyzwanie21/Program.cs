@@ -8,13 +8,19 @@ var employee3 = new Employee("Mandaryna", "Wiśniewska", 40);
 employees.AddRange(new List<Employee>() { employee1, employee2, employee3 });
 
 // oceny dla pracowników
-employee1.AddGrade(2);
-employee1.AddGrade(3);
-employee1.AddGrade(7.5f);
+employee1.AddGrade("3,2");
+employee1.AddGrade("BlaBlabla Moja Ocena");
+employee1.AddGrade(3.25F);
+employee1.AddGrade(3.5678e44D);  
+employee1.AddGrade(7.5F);
+employee1.AddGrade(300);
+employee1.AddGrade(30000000000000000);
 
-employee2.AddGrade(1.5f);
+employee2.AddGrade(1.5D);
 employee2.AddGrade(5);
-employee2.AddGrade(9.5f);
+employee2.AddGrade(9.5F);
+employee2.AddGrade(12L);
+employee2.AddGrade(13L);
 
 employee3.AddGrade(2.6f);
 employee3.AddGrade(4.5f);
@@ -31,7 +37,6 @@ foreach (var employee in employees)
                       $" ilość ocen pracownika: {employee.GetStatistics().Count} \n\n" );
 
 }
-
 
 
 
