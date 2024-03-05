@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Wyzwanie21
 {
@@ -22,7 +23,7 @@ namespace Wyzwanie21
         public void AddGrade(float grade)
         {
         
-            if ((grade > 0) && (grade < 100))
+            if ((grade >= 0) && (grade <= 100))
             {
                 this.grades.Add(grade);
             }
@@ -52,6 +53,34 @@ namespace Wyzwanie21
            
         }
 
+        public void AddGrade(char grade)
+        {
+            
+            switch (char.ToUpper(grade))
+            {
+
+                case 'A':
+                    this.grades.Add(100);
+                    break;
+                case 'B':
+                    this.grades.Add(80);
+                    break;
+                case 'C':
+                    this.grades.Add(60);
+                    break;
+                case 'D':
+                    this.grades.Add(40);
+                    break;
+                case 'E':
+                    this.grades.Add(20);
+                    break;
+                default:
+                    Console.WriteLine("Wrong letter");
+                    break;
+            
+            }
+
+        }
 
         // tutaj warunek, aby zmieścić zmienną double w zmiennej typu float trzeba sprawdzić czy wprowadzana zmienna double nie przekracza zakresu dla zmiennej typu float
         // jeśli tak się zdarzy wyrzuca komunikat o przekroczeniu zakresu   
@@ -97,144 +126,35 @@ namespace Wyzwanie21
             
             // metoda na skróty wykorzystująca możliwości listy
             var statistics = new Statistics();
+
             statistics.Max = this.grades.Max();
             statistics.Min = this.grades.Min();
             statistics.Average = this.grades.Average();
+            switch (statistics.Average)
+            {
+                case >=80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;  
+                default:
+                    statistics.AverageLetter = 'E';
+                    break;
+            }
             statistics.Count = this.grades.Count();
             return statistics;
 
         }
 
-        public Statistics GetStatisticsFor()
-        {
+       
 
-            var statistics = new Statistics();
-
-            statistics.Max = this.grades[0];
-            statistics.Min = this.grades[0];
-            statistics.Average = 0;
-            statistics.Count = 0;
-
-            for (int index = 0; index < this.grades.Count; index++)
-            {
-                
-                if (statistics.Min > grades[index])
-                {
-                    statistics.Min = grades[index];
-                }
-                if (statistics.Max < grades[index])
-                {
-                    statistics.Max = grades[index];
-                }
-                statistics.Count++;
-                statistics.Average += grades[index];
-
-            }
-
-            statistics.Average /= statistics.Count;
-            return statistics;
-
-        }
-
-        public Statistics GetStatisticsWhile()
-        {
-
-            var statistics = new Statistics();
-            
-            statistics.Max = this.grades[0];
-            statistics.Min = this.grades[0];
-            statistics.Average = 0;
-            statistics.Count = 0;
-            
-            var index = 0;  
-            
-            while (index < this.grades.Count) 
-            {
-            
-                if (statistics.Min > this.grades[index])
-                {
-                    statistics.Min = this.grades[index];
-                }
-                if (statistics.Max < this.grades[index])
-                {
-                    statistics.Max = this.grades[index];
-                }
-                statistics.Count++;
-                statistics.Average += this.grades[index];
-                index++;
-            }
-
-            statistics.Average /= statistics.Count;
-            return statistics;
-
-        }
-
-        public Statistics GetStatisticsDoWhile()
-        {
-
-            var statistics = new Statistics();
-            
-            statistics.Max = this.grades[0];
-            statistics.Min = this.grades[0];
-            statistics.Average = 0;
-            statistics.Count = 0;
-
-            var index = 0;
-
-            do
-            {
-                
-                if (statistics.Min > grades[index])
-                {
-                    statistics.Min = grades[index];
-                }
-                if (statistics.Max < grades[index])
-                {
-                    statistics.Max = grades[index];
-                }
-                
-                statistics.Count++;
-                statistics.Average += grades[index];
-                index++;
-
-            } while (index < this.grades.Count);
-
-            statistics.Average /= statistics.Count;
-            return statistics;
-        }
-
-        public Statistics GetStatisticsForEach()
-        {
-
-            //metody własne
-            var statistics = new Statistics();
-            
-            statistics.Max = this.grades[0];
-            statistics.Min = this.grades[0];
-            statistics.Average = 0;
-            statistics.Count = 0;
-            
-            foreach (var grade in this.grades) 
-            {
-
-                if (statistics.Max < grade)
-                {
-                    statistics.Max = grade;
-                } 
-                if (statistics.Min > grade)
-                {  
-                    statistics.Min = grade;
-                }
-
-                statistics.Count++;
-                statistics.Average += grade;
-
-            }
-            
-            statistics.Average /= statistics.Count;
-            return statistics;
-
-        }
 
     }
 }

@@ -7,72 +7,69 @@ var employee3 = new Employee("Mandaryna", "Wiśniewska", 40);
 
 employees.AddRange(new List<Employee>() { employee1, employee2, employee3 });
 
-// oceny dla pracowników
-employee1.AddGrade("3,2");
-employee1.AddGrade("BlaBlabla Moja Ocena");
-employee1.AddGrade(3.25F);
-employee1.AddGrade(3.5678e44D);  
-employee1.AddGrade(7.5F);
-employee1.AddGrade(300);
-employee1.AddGrade(30000000000000000);
+Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++\n" +
+                  "+  System Oceny Pracowników Działu Marketingu:  +\n" +
+                  "+++++++++++++++++++++++++++++++++++++++++++++++++");
+Console.WriteLine($"\nLiczba pracowników: {employees.Count}");
 
-employee2.AddGrade(1.5D);
-employee2.AddGrade(5);
-employee2.AddGrade(9.5F);
-employee2.AddGrade(12L);
-employee2.AddGrade(13L);
+foreach (var employee in employees)
+{
+    
+    while (true) 
+    {
+        
+        Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.LastName} lat: {employee.Age}");
+        Console.WriteLine($"Aby zakończyć ocenę pracownika numer {employees.IndexOf(employee) + 1} wciśnij q i potwierdź!");
+        var grade = Console.ReadLine();
+        
+        switch (grade.ToUpper())
+        {
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+            case "E":
+                Console.WriteLine("Metoda1");
+                employee.AddGrade(grade[0]);
+                break;
+           default:
+                Console.WriteLine("Metoda2");
+                employee.AddGrade(grade);
+                break;
+        }
+        if (grade.ToLower() == "q")
+        {
+            break;
+        }
 
-employee3.AddGrade(2.6f);
-employee3.AddGrade(4.5f);
-employee3.AddGrade(7.5f);
+    }
+               
+}
+
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("\n-- Wyświetlamy statystyki dla wszystkich pracowników marketingu --\n");
+Console.ForegroundColor = ConsoleColor.White;
 
 // wyświetlanie ocen
 foreach (var employee in employees)
 {   
     
-    Console.BackgroundColor = ConsoleColor.Green;
-    Console.WriteLine("Calling method GetStatistics - version with loop for:");
+    Console.BackgroundColor = ConsoleColor.DarkBlue;
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.Write("************************************************************************");
+    Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
     Console.WriteLine();
     Console.WriteLine($" Pracownik : {employee.Name} {employee.LastName} Lat: {employee.Age} ma następujące oceny:");
     Console.WriteLine($" Statystyki: \n" +
-                      $" ocena najniższa: {employee.GetStatisticsFor().Min} \n" +
-                      $" ocena maksymalna:{employee.GetStatisticsFor().Max} \n" +
-                      $" średnia ocena pracownika: {employee.GetStatisticsFor().Average:N2} \n" +
-                      $" ilość ocen pracownika: {employee.GetStatisticsFor().Count} \n" );
+                      $" ocena najniższa: {employee.GetStatistics().Min} \n" +
+                      $" ocena maksymalna:{employee.GetStatistics().Max} \n" +
+                      $" średnia ocena pracownika: {employee.GetStatistics().Average:N2} \n" +
+                      $" średnia ocena pracownika w skali(A-E): {employee.GetStatistics().AverageLetter} \n" +
+                      $" ilość ocen pracownika: {employee.GetStatistics().Count} \n" );
 
-    Console.BackgroundColor = ConsoleColor.Green;
-    Console.WriteLine("Calling method GetStatistics - version with loop while:");
-    Console.BackgroundColor = ConsoleColor.Black;
-    Console.WriteLine();
-    Console.WriteLine($" Pracownik : {employee.Name} {employee.LastName} Lat: {employee.Age} ma następujące oceny:");
-    Console.WriteLine($" Statystyki: \n" +
-                      $" ocena najniższa: {employee.GetStatisticsWhile().Min} \n" +
-                      $" ocena maksymalna:{employee.GetStatisticsWhile().Max} \n" +
-                      $" średnia ocena pracownika: {employee.GetStatisticsWhile().Average:N2} \n" +
-                      $" ilość ocen pracownika: {employee.GetStatisticsWhile().Count} \n");
 
-    Console.BackgroundColor = ConsoleColor.Green;
-    Console.WriteLine("Calling method GetStatistics - version with loop do-while:");
-    Console.BackgroundColor = ConsoleColor.Black;
-    Console.WriteLine();
-    Console.WriteLine($" Pracownik : {employee.Name} {employee.LastName} Lat: {employee.Age} ma następujące oceny:");
-    Console.WriteLine($" Statystyki: \n" +
-                      $" ocena najniższa: {employee.GetStatisticsDoWhile().Min} \n" +
-                      $" ocena maksymalna:{employee.GetStatisticsDoWhile().Max} \n" +
-                      $" średnia ocena pracownika: {employee.GetStatisticsDoWhile().Average:N2} \n" +
-                      $" ilość ocen pracownika: {employee.GetStatisticsDoWhile().Count} \n");
 
-    Console.BackgroundColor = ConsoleColor.Green;
-    Console.WriteLine("Calling method GetStatistics - version with loop foreach:");
-    Console.BackgroundColor = ConsoleColor.Black;
-    Console.WriteLine();
-    Console.WriteLine($" Pracownik : {employee.Name} {employee.LastName} Lat: {employee.Age} ma następujące oceny:");
-    Console.WriteLine($" Statystyki: \n" +
-                      $" ocena najniższa: {employee.GetStatisticsForEach().Min} \n" +
-                      $" ocena maksymalna:{employee.GetStatisticsForEach().Max} \n" +
-                      $" średnia ocena pracownika: {employee.GetStatisticsForEach().Average:N2} \n" +
-                      $" ilość ocen pracownika: {employee.GetStatisticsForEach().Count} \n");
 
 }
 
