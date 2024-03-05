@@ -1,4 +1,6 @@
-﻿namespace Wyzwanie21
+﻿using System.Diagnostics;
+
+namespace Wyzwanie21
 {
     public class Employee
     {
@@ -100,33 +102,138 @@
             statistics.Average = this.grades.Average();
             statistics.Count = this.grades.Count();
             return statistics;
+
         }
 
-        public Statistics GetStatisticsVersion2()
+        public Statistics GetStatisticsFor()
+        {
+
+            var statistics = new Statistics();
+
+            statistics.Max = this.grades[0];
+            statistics.Min = this.grades[0];
+            statistics.Average = 0;
+            statistics.Count = 0;
+
+            for (int index = 0; index < this.grades.Count; index++)
+            {
+                
+                if (statistics.Min > grades[index])
+                {
+                    statistics.Min = grades[index];
+                }
+                if (statistics.Max < grades[index])
+                {
+                    statistics.Max = grades[index];
+                }
+                statistics.Count++;
+                statistics.Average += grades[index];
+
+            }
+
+            statistics.Average /= statistics.Count;
+            return statistics;
+
+        }
+
+        public Statistics GetStatisticsWhile()
+        {
+
+            var statistics = new Statistics();
+            
+            statistics.Max = this.grades[0];
+            statistics.Min = this.grades[0];
+            statistics.Average = 0;
+            statistics.Count = 0;
+            
+            var index = 0;  
+            
+            while (index < this.grades.Count) 
+            {
+            
+                if (statistics.Min > this.grades[index])
+                {
+                    statistics.Min = this.grades[index];
+                }
+                if (statistics.Max < this.grades[index])
+                {
+                    statistics.Max = this.grades[index];
+                }
+                statistics.Count++;
+                statistics.Average += this.grades[index];
+                index++;
+            }
+
+            statistics.Average /= statistics.Count;
+            return statistics;
+
+        }
+
+        public Statistics GetStatisticsDoWhile()
+        {
+
+            var statistics = new Statistics();
+            
+            statistics.Max = this.grades[0];
+            statistics.Min = this.grades[0];
+            statistics.Average = 0;
+            statistics.Count = 0;
+
+            var index = 0;
+
+            do
+            {
+                
+                if (statistics.Min > grades[index])
+                {
+                    statistics.Min = grades[index];
+                }
+                if (statistics.Max < grades[index])
+                {
+                    statistics.Max = grades[index];
+                }
+                
+                statistics.Count++;
+                statistics.Average += grades[index];
+                index++;
+
+            } while (index < this.grades.Count);
+
+            statistics.Average /= statistics.Count;
+            return statistics;
+        }
+
+        public Statistics GetStatisticsForEach()
         {
 
             //metody własne
             var statistics = new Statistics();
+            
             statistics.Max = this.grades[0];
             statistics.Min = this.grades[0];
+            statistics.Average = 0;
             statistics.Count = 0;
+            
             foreach (var grade in this.grades) 
             {
+
                 if (statistics.Max < grade)
                 {
                     statistics.Max = grade;
                 } 
-
                 if (statistics.Min > grade)
                 {  
                     statistics.Min = grade;
                 }
+
                 statistics.Count++;
                 statistics.Average += grade;
-            }
-            statistics.Average /= this.grades.Count;
 
+            }
+            
+            statistics.Average /= statistics.Count;
             return statistics;
+
         }
 
     }

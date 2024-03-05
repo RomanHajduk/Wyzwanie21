@@ -13,7 +13,7 @@ namespace Wyzwanie21.Test
             employee.AddGrade(8.3f);
 
             var statistics = employee.GetStatistics();
-            var statistics2 = employee.GetStatisticsVersion2();
+            var statistics2 = employee.GetStatisticsFor();
 
             Assert.AreEqual(statistics.Min, statistics2.Min);
             Assert.AreEqual(statistics.Max, statistics2.Max);
@@ -36,7 +36,7 @@ namespace Wyzwanie21.Test
 
             var averageScore = employee.GetSummaryScore()/ 5; 
            
-            var statisticEmployeeToVerified = employee.GetStatistics();
+            var statisticEmployeeToVerified = employee.GetStatisticsWhile();
             
             Assert.AreEqual(1.4f, statisticEmployeeToVerified.Min);
             Assert.AreEqual(6.9f,statisticEmployeeToVerified.Max);
