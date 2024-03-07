@@ -21,24 +21,12 @@ foreach (var employee in employees)
         Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.LastName} lat: {employee.Age}");
         Console.WriteLine($"Aby zakończyć ocenę pracownika numer {employees.IndexOf(employee) + 1} wciśnij q i potwierdź!");
         var grade = Console.ReadLine();
-        
-        switch (grade.ToUpper())
-        {
-            case "A":
-            case "B":
-            case "C":
-            case "D":
-            case "E":
-                Console.WriteLine("Metoda1");
-                employee.AddGrade(grade[0]);
-                break;
-           default:
-                Console.WriteLine("Metoda2");
-                employee.AddGrade(grade);
-                break;
-        }
+
+        employee.AddGrade(grade);
+    
         if (grade.ToLower() == "q")
         {
+            Console.WriteLine($"Koniec dodawania ocen dla pracownika nr {employees.IndexOf(employee) + 1}");
             break;
         }
 

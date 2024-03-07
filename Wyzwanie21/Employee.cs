@@ -107,9 +107,25 @@ namespace Wyzwanie21
             }
             else 
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine("This string is not float number");
-                Console.ForegroundColor = ConsoleColor.White;
+                switch (grade.ToUpper())
+                {
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                    case "E":
+                        Console.WriteLine("Metoda1");
+                        this.AddGrade(grade.ElementAt(0));
+                        break;
+                    case "Q":
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Error.WriteLine("This string is not float number");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                }
+                
             }
 
         }
