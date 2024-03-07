@@ -110,12 +110,19 @@ namespace Wyzwanie21
                 switch (grade.ToUpper())
                 {
                     case "A":
+                        this.grades.Add(100);
+                        break;
                     case "B":
+                        this.grades.Add(80);
+                        break;
                     case "C":
+                        this.grades.Add(60);
+                        break;
                     case "D":
+                        this.grades.Add(40);
+                        break;
                     case "E":
-                        Console.WriteLine("Metoda1");
-                        this.AddGrade(grade.ElementAt(0));
+                        this.grades.Add(20);
                         break;
                     case "Q":
                         break;
