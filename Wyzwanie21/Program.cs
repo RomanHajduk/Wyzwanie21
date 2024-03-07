@@ -21,12 +21,39 @@ foreach (var employee in employees)
         Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.LastName} lat: {employee.Age}");
         Console.WriteLine($"Aby zakończyć ocenę pracownika numer {employees.IndexOf(employee) + 1} wciśnij q i potwierdź!");
         var grade = Console.ReadLine();
+        try
+        {
+            
+            employee.AddGrade(grade);
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (grade.ToLower() != "q")
+            {
+                Console.WriteLine("Wprowadzono poprawne dane!");
+            }         
 
-        employee.AddGrade(grade);
-    
+        }
+        catch (Exception ex)
+        {
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.Write(ex.Message);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.WriteLine("Wprowadzono błędne dane!");
+          
+
+        }
+        finally 
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        
         if (grade.ToLower() == "q")
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Koniec dodawania ocen dla pracownika nr {employees.IndexOf(employee) + 1}");
+            Console.ForegroundColor = ConsoleColor.White;
             break;
         }
 
