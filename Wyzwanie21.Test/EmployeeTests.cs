@@ -7,7 +7,7 @@ namespace Wyzwanie21.Test
         public void WhenAddedCorrectLetterGrade_ShouldTheCorrectResult()
         {
             
-            var employee = new Employee("Mariusz", "Pudzianowski", 54);
+            var employee = new Employee("Mariusz", "Pudzianowski", 54,'M');
             employee.AddGrade('E');
             employee.AddGrade('a');
             employee.AddGrade('d');
@@ -28,7 +28,7 @@ namespace Wyzwanie21.Test
         public void WhenAddedCorrectGradeUser_ShouldCorrectStatistics()
         {
             
-            var employee = new Employee("Adam","Kowalski",35);
+            var employee = new Employee("Adam","Kowalski",35, 'M');
             
             employee.AddGrade(10);
             employee.AddGrade('A');
@@ -52,7 +52,7 @@ namespace Wyzwanie21.Test
         public void WhenAddedAllPositiveCorrectAndFailScoreUser_ShouldBeCorrectTotalPoint()
         {
             
-            var employee = new Employee("Magdalena", "Jaworska", 44);
+            var employee = new Employee("Magdalena", "Jaworska", 44, 'K');
             employee.AddGrade("adam");
             employee.AddGrade(-26);
             employee.AddGrade(136);
@@ -81,7 +81,7 @@ namespace Wyzwanie21.Test
         public void WhenAddedAllScoreUser_ShouldCorrectNegativeResultAndPositiveCountGrades()
         {
             
-            var employee = new Employee("Robin", "Hood", 24);
+            var employee = new Employee("Robin", "Hood", 24, 'M');
             employee.AddGrade('A');
             employee.AddGrade('b');
             employee.AddGrade(21);

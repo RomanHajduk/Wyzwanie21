@@ -1,22 +1,13 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Wyzwanie21
+﻿namespace Wyzwanie21
 {
-    public class Employee
+    public class Employee : Person
     {
         
-        public string Name { get; private set; }
-        public string LastName { get; private set; }
-        public int Age { get; private set; }
         List<float> grades = new List<float>();
 
-        public Employee(string Name, string LastName, int Age)
-        {
-
-            this.Name = Name;
-            this.LastName = LastName;
-            this.Age = Age;
+        public Employee(string name, string lastname, int age, char sex) : 
+                        base(name, lastname, age, sex)
+        { 
 
         }
 

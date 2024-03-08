@@ -1,9 +1,9 @@
 ﻿using Wyzwanie21;
 List<Employee> employees = new List<Employee>();
 
-var employee1 = new Employee("Max", "Golonko", 32);
-var employee2 = new Employee("Jarosław", "Kaczyński", 74);
-var employee3 = new Employee("Mandaryna", "Wiśniewska", 40);
+var employee1 = new Employee("Max", "Golonko", 32, 'M');
+var employee2 = new Employee("Jarosław", "Kaczyński", 74, 'M');
+var employee3 = new Employee("Mandaryna", "Wiśniewska", 40, 'K');
 
 employees.AddRange(new List<Employee>() { employee1, employee2, employee3 });
 
@@ -18,7 +18,7 @@ foreach (var employee in employees)
     while (true) 
     {
         
-        Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.LastName} lat: {employee.Age}");
+        Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.Lastname} lat: {employee.Age} płeć: {employee.Sex}");
         Console.WriteLine($"Aby zakończyć ocenę pracownika numer {employees.IndexOf(employee) + 1} wciśnij q i potwierdź!");
         var grade = Console.ReadLine();
         try
@@ -75,7 +75,7 @@ foreach (var employee in employees)
     Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
     Console.WriteLine();
-    Console.WriteLine($" Pracownik : {employee.Name} {employee.LastName} Lat: {employee.Age} ma następujące oceny:");
+    Console.WriteLine($" Pracownik : {employee.Name} {employee.Lastname} Lat: {employee.Age} Płeć {employee.Sex} ma następujące oceny:");
     Console.WriteLine($" Statystyki: \n" +
                       $" ocena najniższa: {employee.GetStatistics().Min} \n" +
                       $" ocena maksymalna:{employee.GetStatistics().Max} \n" +
