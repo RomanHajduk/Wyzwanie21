@@ -98,29 +98,21 @@ namespace Wyzwanie21
             }
             else 
             {
-                switch (grade.ToUpper())
+                if (grade.Length == 1 && grade.ToLower() !="q" )
                 {
-                    case "A":
-                        this.grades.Add(100f);
-                        break;
-                    case "B":
-                        this.grades.Add(80f);
-                        break;
-                    case "C":
-                        this.grades.Add(60f);
-                        break;
-                    case "D":
-                        this.grades.Add(40f);
-                        break;
-                    case "E":
-                        this.grades.Add(20f);
-                        break;
-                    case "Q":
-                        break;
-                    default:
+                    this.AddGrade(char.Parse(grade));
+                }
+                else
+                {
+                    if (grade.ToLower() == "q")
+                    { 
+                    
+                    }
+                    else
+                    {
                         throw new Exception("This string is not float number");
-                
-                }               
+                    } 
+                }                   
             }
 
         }
