@@ -54,19 +54,19 @@ namespace Wyzwanie21
             {
 
                 case 'A':
-                    this.grades.Add(100);
+                    this.AddGrade(100f);
                     break;
                 case 'B':
-                    this.grades.Add(80);
+                    this.AddGrade(80f);
                     break;
                 case 'C':
-                    this.grades.Add(60);
+                    this.AddGrade(60f);
                     break;
                 case 'D':
-                    this.grades.Add(40);
+                    this.AddGrade(40f);
                     break;
                 case 'E':
-                    this.grades.Add(20);
+                    this.AddGrade(20f);
                     break;
                 default:
                     throw new Exception("Wrong letter");
