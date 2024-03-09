@@ -1,6 +1,6 @@
 ﻿namespace Wyzwanie21
 {
-    public class Employee : Person
+    public class Employee : Person, IEmployee
     {
         
         List<float> grades = new List<float>();
@@ -109,9 +109,13 @@
         }
 
         public float GetSummaryScore()
-        { 
-
-            return this.grades.Sum(); 
+        {
+            var sum = 0f;
+            foreach (var grade in grades)
+            {
+                sum += grade;
+            }
+            return sum; 
         
         }
 

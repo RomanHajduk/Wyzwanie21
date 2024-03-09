@@ -1,30 +1,30 @@
 ﻿using Wyzwanie21;
-List<Employee> employees = new List<Employee>();
+List<Supervisor> supervisors = new List<Supervisor>();
 
-var employee1 = new Employee("Max", "Golonko", 32, 'M');
-var employee2 = new Employee("Jarosław", "Kaczyński", 74, 'M');
-var employee3 = new Employee("Mandaryna", "Wiśniewska", 40, 'K');
+var supervisor1 = new Supervisor("Max", "Golonko", 32, 'M');
+var supervisor2 = new Supervisor("Jarosław", "Kaczyński", 74, 'M');
+var supervisor3 = new Supervisor("Mandaryna", "Wiśniewska", 40, 'K');
 
-employees.AddRange(new List<Employee>() { employee1, employee2, employee3 });
+supervisors.AddRange(new List<Supervisor>() { supervisor1, supervisor2, supervisor3 });
 
-Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++\n" +
-                  "+  System Oceny Pracowników Działu Marketingu:  +\n" +
-                  "+++++++++++++++++++++++++++++++++++++++++++++++++");
-Console.WriteLine($"\nLiczba pracowników: {employees.Count}");
+Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
+                  "+  System Oceny Pracowników Wyższego Szczebla:Kierownicy  +\n" +
+                  "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+Console.WriteLine($"\nLiczba pracowników wyższego szczebla(kierownicy): {supervisors.Count}");
 
-foreach (var employee in employees)
+foreach (var supervisor in supervisors)
 {
     
     while (true) 
     {
         
-        Console.WriteLine($"Podaj kolejną ocenę pracownika numer {employees.IndexOf(employee) + 1}:  {employee.Name} {employee.Lastname} lat: {employee.Age} płeć: {employee.Sex}");
-        Console.WriteLine($"Aby zakończyć ocenę pracownika numer {employees.IndexOf(employee) + 1} wciśnij q i potwierdź!");
+        Console.WriteLine($"Podaj kolejną ocenę kierownika numer {supervisors.IndexOf(supervisor) + 1}:  {supervisor.Name} {supervisor.Lastname} lat: {supervisor.Age} płeć: {supervisor.Sex}");
+        Console.WriteLine($"Aby zakończyć ocenę kierownika numer {supervisors.IndexOf(supervisor) + 1} wciśnij q i potwierdź!");
         var grade = Console.ReadLine();
         try
         {
             
-            employee.AddGrade(grade);
+            supervisor.AddGrade(grade);
             Console.ForegroundColor = ConsoleColor.Green;
             if (grade.ToLower() != "q")
             {
@@ -52,7 +52,7 @@ foreach (var employee in employees)
         if (grade.ToLower() == "q")
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"Koniec dodawania ocen dla pracownika nr {employees.IndexOf(employee) + 1}");
+            Console.WriteLine($"Koniec dodawania ocen dla kierownika nr {supervisors.IndexOf(supervisor) + 1}");
             Console.ForegroundColor = ConsoleColor.White;
             break;
         }
@@ -62,11 +62,11 @@ foreach (var employee in employees)
 }
 
 Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("\n-- Wyświetlamy statystyki dla wszystkich pracowników marketingu --\n");
+Console.WriteLine("\n-- Wyświetlamy statystyki dla wszystkich pracowników wyższego szczebla (kierownicy) --\n");
 Console.ForegroundColor = ConsoleColor.White;
 
 // wyświetlanie ocen
-foreach (var employee in employees)
+foreach (var supervisor in supervisors)
 {   
     
     Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -75,16 +75,13 @@ foreach (var employee in employees)
     Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
     Console.WriteLine();
-    Console.WriteLine($" Pracownik : {employee.Name} {employee.Lastname} Lat: {employee.Age} Płeć {employee.Sex} ma następujące oceny:");
+    Console.WriteLine($" Pracownik wyższego szczebla (kierownik): {supervisor.Name} {supervisor.Lastname} Lat: {supervisor.Age} Płeć {supervisor.Sex} ma następujące oceny:");
     Console.WriteLine($" Statystyki: \n" +
-                      $" ocena najniższa: {employee.GetStatistics().Min} \n" +
-                      $" ocena maksymalna:{employee.GetStatistics().Max} \n" +
-                      $" średnia ocena pracownika: {employee.GetStatistics().Average:N2} \n" +
-                      $" średnia ocena pracownika w skali(A-E): {employee.GetStatistics().AverageLetter} \n" +
-                      $" ilość ocen pracownika: {employee.GetStatistics().Count} \n" );
-
-
-
+                      $" ocena najniższa: {supervisor.GetStatistics().Min} \n" +
+                      $" ocena maksymalna:{supervisor.GetStatistics().Max} \n" +
+                      $" średnia ocena kierownika: {supervisor.GetStatistics().Average:N2} \n" +
+                      $" średnia ocena kierownika w skali(A-E): {supervisor.GetStatistics().AverageLetter} \n" +
+                      $" ilość ocen kierownika: {supervisor.GetStatistics().Count} \n" );
 
 }
 
