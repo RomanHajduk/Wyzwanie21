@@ -1,46 +1,50 @@
 ﻿namespace Wyzwanie21
 {
-    public class Employee : Person, IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-        
         List<float> grades = new List<float>();
 
-        public Employee(string name, string lastname, int age, char sex) : 
-                        base(name, lastname, age, sex)
-        { 
+        public override event GradeAddedToEmployeeDelegate GradeAddedToEmployee;
 
+        public EmployeeInMemory(string name, string lastname, int age, char sex) : base(name, lastname, age, sex)
+        {
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
-        
             if ((grade >= 0) && (grade <= 100))
             {
                 this.grades.Add(grade);
+                if (GradeAddedToEmployee != null) 
+                { 
+                    GradeAddedToEmployee(this, EventArgs.Empty);
+                }
             }
             else
             {
-                throw new Exception("Invalid data. Grade out of range: range 0-100!!!");     
+                throw new Exception("Invalid data. Grade out of range: range 0-100!!!");
             }
-
         }
-        public void AddGrade(int grade)
+
+        public override void AddGrade(int grade)
         {
-          
             this.AddGrade((float)grade);
-
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(double grade)
         {
-            
-            this.AddGrade((float) grade);
-           
+            if ((grade < float.MaxValue) && (grade > float.MinValue))
+            {
+                this.AddGrade((float)grade);
+            }
+            else
+            {
+                throw new Exception("Variable is out of range type float");
+            }
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
-            
             switch (char.ToUpper(grade))
             {
 
@@ -61,68 +65,48 @@
                     break;
                 default:
                     throw new Exception("Wrong letter");
-                                
-            }
 
+            }
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(string grade)
         {
-            
-            if ((grade < float.MaxValue) && (grade > float.MinValue))
-            {
-                this.AddGrade((float) grade);
-            }
-            else
-            {
-                throw new Exception("Variable is out of range type float");    
-            }
-
-        }
-
-        public void AddGrade(string grade)
-        {
-            
             if (float.TryParse(grade, out float result))
             {
                 this.AddGrade(result);
             }
-            else 
+            else
             {
-                if (grade.Length == 1 && grade.ToLower() !="q" )
+                if (grade.Length == 1 && grade.ToLower() != "q")
                 {
                     this.AddGrade(char.Parse(grade));
                 }
                 else
                 {
                     if (grade.ToLower() == "q")
-                    { 
-                    
+                    {
+
                     }
                     else
                     {
                         throw new Exception("This string is not float number");
-                    } 
-                }                   
+                    }
+                }
             }
-
         }
 
         public float GetSummaryScore()
         {
-            var sum = 0f;
+            var summary = 0f;
             foreach (var grade in grades)
             {
-                sum += grade;
+                summary += grade;
             }
-            return sum; 
+            return summary;
         
         }
-
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
-            
-            // metoda na skróty wykorzystująca możliwości listy
             var statistics = new Statistics();
 
             statistics.Max = this.grades.Max();
@@ -130,7 +114,7 @@
             statistics.Average = this.grades.Average();
             switch (statistics.Average)
             {
-                case >=80:
+                case >= 80:
                     statistics.AverageLetter = 'A';
                     break;
                 case >= 60:
@@ -141,15 +125,13 @@
                     break;
                 case >= 20:
                     statistics.AverageLetter = 'D';
-                    break;  
+                    break;
                 default:
                     statistics.AverageLetter = 'E';
                     break;
             }
             statistics.Count = this.grades.Count();
             return statistics;
-
         }
-
     }
 }

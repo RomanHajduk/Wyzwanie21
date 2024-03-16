@@ -2,16 +2,23 @@
 {
     public class Supervisor : Person, IEmployee
     {
+
         List<float> supervisorGrades = new List<float>();
         public Supervisor(string name, string lastname, int age, char sex) : base(name, lastname, age, sex)
         {
         }
+
+        public event EmployeeBase.GradeAddedToEmployeeDelegate GradeAddedToEmployee;
 
         public void AddGrade(float grade)
         {
             if ((grade >= 0) && (grade <= 100))
             {
                 this.supervisorGrades.Add(grade);
+                if (GradeAddedToEmployee  != null)
+                {
+                    GradeAddedToEmployee(this, EventArgs.Empty);
+                }
             }
             else
             {
@@ -84,6 +91,28 @@
                     }
                     
             }
+        }
+
+        public void AddGrade(int grade)
+        {
+            this.AddGrade((float) grade);
+        }
+
+        public void AddGrade(double grade)
+        {
+            if ((grade < float.MaxValue) && (grade > float.MinValue))
+            {
+                this.AddGrade((float)grade);
+            }
+            else
+            {
+                throw new Exception("Variable is out of range type float");
+            }
+        }
+
+        public void AddGrade(char grade)
+        {
+            throw new NotImplementedException();
         }
 
         public Statistics GetStatistics()
