@@ -14,11 +14,7 @@
             fileName = $"{name}{lastname}.txt";
         }
 
-        public string GetFileGradeEmployee()
-        { 
-            return fileName;
-        
-        }
+       
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <=100)
@@ -111,48 +107,15 @@
                 {
                     List<string> sGrades = reader.ReadLine().Split(" ").ToList();
                     sGrades.RemoveAt(sGrades.Count - 1);
-                    List<float> grades = new List<float>();
-                    foreach (var item in sGrades)
-                    {
-                         grades.Add(float.Parse(item));
-                    }
-                    var count = 0;
-                    float average = 0;
-                    stats.Min = grades[0];
-                    stats.Max = grades[0];
+                    List<float> grades = sGrades.ConvertAll(float.Parse).ToList();
+                    
                     foreach (var grade in grades)
                     {
-                        if (grade < stats.Min)
-                        { 
-                            stats.Min = grade;
-                        }
-                        if (grade > stats.Max)
-                        {
-                            stats.Max = grade;
-                        }
-                        count++;
-                        average += grade;
+                        stats.AddGrade(grade); 
+                        //grades.Add(float.Parse(item));
                     }
-                    stats.Average = average/count;
-                    switch (stats.Average)
-                    {
-                        case >= 80:
-                            stats.AverageLetter = 'A';
-                            break;
-                        case >= 60:
-                            stats.AverageLetter = 'B';
-                            break;
-                        case >= 40:
-                            stats.AverageLetter = 'C';
-                            break;
-                        case >= 20:
-                            stats.AverageLetter = 'D';
-                            break;
-                        default:
-                            stats.AverageLetter = 'E';
-                            break;
-                    }
-                    stats.Count = count;
+                    
+                    
                 }
                 return stats;
             }

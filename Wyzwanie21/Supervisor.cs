@@ -119,29 +119,11 @@
         {
             // metoda na skróty wykorzystująca możliwości listy
             var statistics = new Statistics();
-
-            statistics.Max = this.supervisorGrades.Max();
-            statistics.Min = this.supervisorGrades.Min();
-            statistics.Average = this.supervisorGrades.Average();
-            switch (statistics.Average)
+            foreach (var grade in supervisorGrades) 
             {
-                case >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
+                statistics.AddGrade(grade);
             }
-            statistics.Count = this.supervisorGrades.Count();
+
             return statistics;
         }
     }

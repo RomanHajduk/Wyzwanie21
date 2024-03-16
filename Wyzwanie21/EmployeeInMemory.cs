@@ -109,28 +109,10 @@
         {
             var statistics = new Statistics();
 
-            statistics.Max = this.grades.Max();
-            statistics.Min = this.grades.Min();
-            statistics.Average = this.grades.Average();
-            switch (statistics.Average)
-            {
-                case >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
+            foreach (var grade in grades) 
+            { 
+                statistics.AddGrade(grade);
             }
-            statistics.Count = this.grades.Count();
             return statistics;
         }
     }
