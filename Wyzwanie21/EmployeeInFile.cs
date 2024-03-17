@@ -96,7 +96,64 @@
                 }
             }
         }
+        public Statistics GetStatisticsWithoutList()
+        {
+            Statistics stats = new Statistics();
 
+            if (File.Exists(fileName))
+            {
+                using (var reader = File.OpenText(fileName))
+                {
+                    string grade = "";
+                    
+                    foreach (var item in reader.ReadLine())
+                    {
+                        if ( item != ' ' && item != '\n')
+                        {
+                            grade += item;
+                        }
+                        else
+                        {   
+                            stats.AddGrade(float.Parse(grade));
+                            grade = "";   
+                        }
+                        
+                    
+
+                    }
+                }
+                return stats;
+            }
+            else
+            {
+                return stats;
+            }
+
+        }
+        public Statistics GetStatisticsWithoutList2()
+        {
+            Statistics stats = new Statistics();
+
+            if (File.Exists(fileName))
+            {
+                using (var reader = File.OpenText(fileName))
+                {
+                    foreach (var item in reader.ReadLine().Split(" "))
+                    {
+                        if (item != "")
+                        {
+                            stats.AddGrade(float.Parse(item));
+                        }                           
+                    }
+                }
+                return stats;
+            }
+            else
+            {
+                return stats;
+            }
+
+        }
         public override Statistics GetStatistics()
         {
             Statistics stats = new Statistics();
@@ -105,17 +162,17 @@
             {
                 using (var reader = File.OpenText(fileName))
                 {
-                    List<string> sGrades = reader.ReadLine().Split(" ").ToList();
+                    List<string> sGrades = reader.ReadLine().Split(" ").ToList();   
+                    //generalnie kod mógłbym napisać tak, aby pominąć zabawę z obiema listami
+                    //ale musiałbym napisać kod, który wczytuje kolejno znaki z pobranej linii wydzielając kolejne liczby i podane liczby poddawać do
+                    //metody AddGrade. Może zrobię to jutro, gdyż dziś idę na nockę do pracy :(
                     sGrades.RemoveAt(sGrades.Count - 1);
                     List<float> grades = sGrades.ConvertAll(float.Parse).ToList();
                     
                     foreach (var grade in grades)
                     {
                         stats.AddGrade(grade); 
-                        //grades.Add(float.Parse(item));
                     }
-                    
-                    
                 }
                 return stats;
             }

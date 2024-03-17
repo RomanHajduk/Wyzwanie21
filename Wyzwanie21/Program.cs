@@ -211,7 +211,7 @@ while (true)
                                 Console.SetCursorPosition(0, Console.GetCursorPosition().Top);
                                 foreach (var emp in employeesInDatabase)
                                 {
-                                    var statEmployee = emp.GetStatistics();
+                                    var statEmployee = emp.GetStatisticsWithoutList2();
                                     Console.WriteLine("*********************************************************************************\n" +
                                                       $"Pracownik: {emp.Name} {emp.Lastname} Wiek {emp.Age} Płeć: {(emp.Sex == 'M' ? "Mężczyzna" : "Kobieta")}\n" +
                                                       $"*********************************************************************************\n" +
